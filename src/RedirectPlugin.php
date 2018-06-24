@@ -22,8 +22,6 @@ use craft\events\RegisterUrlRulesEvent;
 use craft\web\UrlManager;
 use yii\base\Event;
 
-
-
 class RedirectPlugin extends \craft\base\Plugin
 {
     public static $plugin;
@@ -72,10 +70,10 @@ class RedirectPlugin extends \craft\base\Plugin
     public function getCpNavItem()
     {
         return [
-        'url'=> 'redirect',
-        'label'=>Craft::t('redirect', 'Site redirects'),
-      ];
+            'url'=> 'redirect',
+            'label'=>Craft::t('redirect', 'Site redirects'),
             'icon' => 'share'
+        ];
     }
 
     protected function createSettingsModel(): Settings
@@ -103,8 +101,10 @@ class RedirectPlugin extends \craft\base\Plugin
     public function registerCpUrlRules(RegisterUrlRulesEvent $event)
     {
         // only register CP URLs if the user is logged in
-        if (!\Craft::$app->user->identity)
+        if (!\Craft::$app->user->identity) {
             return;
+        }
+
         $rules = [
             // register routes for the sub nav
             'redirect' => 'redirect/settings/',
@@ -185,7 +185,6 @@ class RedirectPlugin extends \craft\base\Plugin
                         ]
                     ];
                 }
-
             });
         }
 
